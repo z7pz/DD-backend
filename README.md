@@ -1,4 +1,20 @@
-# this project is all about learning new stuff and get used to it
-- learn fastify and get used to it
-- learn prisma
-- 
+# This project is all about learning new stuff and get used to it
+## this is not for production - only for learning purposes
+- Learn fastify and get used to it
+- Learn prisma
+- Learn how to implement discord oauth from scrath 
+- Use best practice techniques ex. commitslint
+- Foucs on code performance and little of code simplicity 
+
+### Roadmap
+- [X] create the base of the api
+- [-] handle code issues becuase of dev uses (fix and handle base-code errors)
+- [ ] setting up the database (prisma)
+- [ ] discord oauth 
+- [ ] discord dashboard
+    - [ ] server settings
+        - [ ] set prefix
+        - [ ] change language
+        - **ADD MORE**
+    - [ ] use settings
+        - **ADD MORE**
