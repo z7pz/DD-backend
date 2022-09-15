@@ -1,12 +1,11 @@
+import { FastifyReply, FastifyRequest, RequestPayload } from "fastify";
 import { assignRoutes } from "../../utils/registries/assignRoutes";
 import { Router } from "../Router";
 
 export class DiscordOAuthRouter extends Router("/oauth") {
-  "GET /"(req: Request, res: any) {
-    res.send("oauth");
+  "GET /"(req: RequestPayload, res: FastifyReply) {
   }
-  "GET /code"(req: Request, res: any) {
-    res.send("code");
+  "GET /code"(req: FastifyRequest, res: FastifyReply) {
   }
 }
 
