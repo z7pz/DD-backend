@@ -1,6 +1,7 @@
 import "dotenv/config";
 import env from "env-var";
 export const config = {
+  secret: env.get("SECRET").required().asString(),
   discord: {
     token: env.get("DISCORD_TOKEN").required().asString(),
     secret: env.get("DISCORD_SECRET").required().asString(),

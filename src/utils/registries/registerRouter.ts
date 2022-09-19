@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-const dontInclude = ["basePath"];
+const dontInclude = ["basePath", "prisma"];
 export function registerRouter(router: any, server: FastifyInstance) {
   let obj = router;
   let methods: any[] = [];
@@ -18,6 +18,7 @@ export function registerRouter(router: any, server: FastifyInstance) {
   } while ((obj = Object.getPrototypeOf(obj)) && Object.getPrototypeOf(obj));
   for (let i = 0; i < methods.length; i++) {
     const [method, route] = methods[i].split(/(?<=^\S+)\s/) as string[];
+    console.log(methods[i])
     server[(method.toLowerCase()) as "get"](
       `${router.basePath}${route == "/" ? "" : route}`,
       router[methods[i]]
