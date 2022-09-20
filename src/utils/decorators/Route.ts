@@ -3,7 +3,7 @@ interface Options {
   prefix?: string;
   suffix?: string;
 }
-export function Route({ prefix = "", suffix = "" }: Options) {
+export function Route({ prefix = "", suffix = "" }: Options): ClassDecorator {
   return (target: any) => {
     const methodNames = Reflect.ownKeys(target.prototype).filter(
       (e) => !execlude.includes(e as string)
