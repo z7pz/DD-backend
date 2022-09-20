@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const bootstrap = async (
   fastify: FastifyInstance,
   _options: unknown,
-  next: () => void
+  _next: () => void
 ) => {
   registerRouter(new DiscordOAuthRouter(), fastify);
 };

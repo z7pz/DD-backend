@@ -4,7 +4,7 @@ import { Router } from "../Router";
 import axios from "axios";
 import Crypto from "crypto-js";
 import config from "../../utils/config";
-import {prisma} from '../../index'
+import { prisma } from "../../index";
 interface AuthResponseData {
   access_token: string;
   refresh_token: string;
@@ -70,10 +70,10 @@ export class DiscordOAuthRouter extends Router("/oauth") {
         };
         const user = await gerUser(access_token);
         const OAuth2User = await prisma.auth.findUnique({
-          where: { user_id: user.id }, 
+          where: { user_id: user.id },
         });
         if (OAuth2User) {
-          await  prisma.auth.update({
+          await prisma.auth.update({
             where: { user_id: user.id },
             data: {
               access_token: { set: encrypted.access_token },
