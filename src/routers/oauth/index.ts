@@ -5,6 +5,8 @@ import axios from "axios";
 import Crypto from "crypto-js";
 import config from "../../utils/config";
 import { prisma } from "../../index";
+import { CLIENT_PAGES } from "../../utils/constants";
+
 interface AuthResponseData {
   access_token: string;
   refresh_token: string;
@@ -12,11 +14,6 @@ interface AuthResponseData {
   token_type: string;
   expires_in: number;
 }
-
-const CLIENT_PAGES = {
-  landing: "http://127.0.0.1:5173",
-  servers: "http://127.0.0.1:5173/servers",
-};
 
 export const jsonToUrlParams = (data: Record<string, any>) => {
   const params = new URLSearchParams();

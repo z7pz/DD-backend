@@ -4,6 +4,8 @@
     "target": "ESNext",
     "outDir": "./dist",
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "experimentalDecorators": true
   }
 }

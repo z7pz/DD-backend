@@ -5,6 +5,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// TODO: change the connector (to postgress or mongodb)
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -15,4 +16,16 @@ model auth {
   user_id       String @unique
   access_token  String
   refresh_token String
+}
+
+model user {
+  id      Int    @id @default(autoincrement())
+  user_id String @unique
+}
+
+model guild {
+  id       Int    @id @default(autoincrement())
+  guild_id String @unique
+  prefix   String
+  language String
 }
