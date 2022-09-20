@@ -8,9 +8,9 @@
 
 ### Roadmap
 - [X] create the base of the api
-- [-] handle code issues becuase of dev uses (fix and handle base-code errors)
-- [ ] setting up the database (prisma)
-- [ ] discord oauth 
+- [ ] handle code issues becuase of dev uses (fix and handle base-code errors)
+- [X] setting up the database (prisma)
+- [X] discord oauth 
 - [ ] discord dashboard
     - [ ] server settings
         - [ ] set prefix
