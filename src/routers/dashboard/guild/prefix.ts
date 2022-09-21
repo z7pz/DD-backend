@@ -1,6 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { Route } from "../../../utils/decorators/Route";
-@Route({ prefix: "/guild" })
+import { Router } from "../../../utils/decorators/Router";
+@Router({ prefix: "/guild" })
 export class GuildPrefixRoute {
-  "GET /prefix"(req: FastifyRequest, res: FastifyReply) {}
+  "GET /prefix"(req: FastifyRequest, res: FastifyReply) {
+    res.send("TEST");
+  }
 }
