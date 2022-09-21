@@ -86,6 +86,7 @@ export class DiscordOAuthRouter extends Router("/oauth") {
             },
           });
         }
+        req.session.token = encrypted.access_token;
         if (
           CLIENT_PAGES[(req.query as any).goto as keyof typeof CLIENT_PAGES]
         ) {

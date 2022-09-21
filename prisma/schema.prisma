@@ -29,3 +29,9 @@ model guild {
   prefix   String
   language String
 }
+
+model session {
+  id        Int    @id @default(autoincrement())
+  sessionId String @unique
+  session   String
+}
