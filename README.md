@@ -16,5 +16,5 @@
         - [ ] set prefix
         - [ ] change language
         - **ADD MORE**
-    - [ ] use settings
+    - [ ] user settings
         - **ADD MORE**
