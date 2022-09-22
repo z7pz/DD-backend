@@ -6,44 +6,57 @@ export class Store implements FastifySessionPlugin.SessionStore {
   constructor(public prisma: PrismaClient) {}
   async set(sessionId: string, session: any, callback: (err?: Error) => void) {
     try {
-      const s = await this.prisma.session.upsert({
-        create: {
-          sessionId,
-          session: JSON.stringify(session),
-        },
+      const data = await this.prisma.session.findUnique({
         where: {
           sessionId,
         },
-        update: {
-          session: JSON.stringify(session),
-        },
       });
+      if (!data) {
+        await this.prisma.session.create({
+          data: {
+            session: JSON.stringify(session),
+            sessionId,
+          },
+        });
+      } else {
+        await this.prisma.session.update({
+          where: {
+            sessionId,
+          },
+          data: {
+            session: JSON.stringify(session),
+          },
+        });
+      }
       callback();
     } catch (err: any) {
       callback(err);
     }
   }
 
-  async get(
+  get(
     sessionId: string,
     callback: (err: Error | null, result: Session) => void
-  ): Promise<void> {
-    try {
-      const res = await this.prisma.session.findUnique({
+  ): void {
+    this.prisma.session
+      .findUnique({
         where: {
           sessionId,
         },
+      })
+      .then((res) => {
+        if (res) {
+          console.log("data");
+          callback(null, JSON.parse(res!.session));
+        } else {
+          console.log("err");
+          callback(null, null as unknown as Session);
+        }
+      })
+      .catch((err) => {
+        console.log("err");
+        callback(null, null as unknown as Session);
       });
-      if (res) {
-        callback(null, JSON.parse(res!.session));
-      } else {
-        //@ts-ignore
-        callback();
-      }
-    } catch (err) {
-      //@ts-ignore
-      callback();
-    }
   }
 
   destroy(sessionId: string, callback: (err?: Error) => void) {

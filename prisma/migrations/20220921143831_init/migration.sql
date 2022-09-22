@@ -31,6 +31,12 @@ CREATE TABLE "session" (
 CREATE UNIQUE INDEX "auth_user_id_key" ON "auth"("user_id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "auth_access_token_key" ON "auth"("access_token");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "auth_refresh_token_key" ON "auth"("refresh_token");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "user_user_id_key" ON "user"("user_id");
 
 -- CreateIndex

@@ -8,6 +8,7 @@ import FastifyCookiePlugin from "@fastify/cookie";
 import cors from "@fastify/cors";
 import config from "./utils/config";
 import { Store } from "./utils/Store";
+import { MainRouter } from "./routers/Main";
 const prisma = new PrismaClient();
 MemoryStore
 const bootstrap = async (
@@ -27,9 +28,10 @@ const bootstrap = async (
     store: new Store(prisma),
     cookie: { secure: false },
   });
+  registerRouter(new MainRouter(), fastify);
   registerRouter(new DiscordOAuthRouter(), fastify);
   registerRouter(new DashboardRouter(), fastify);
 };
-let options = { logger: false };
+let options = { logger: true };
 export { prisma, options };
 export default bootstrap;

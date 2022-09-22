@@ -14,8 +14,8 @@ datasource db {
 model auth {
   id            Int    @id @default(autoincrement())
   user_id       String @unique
-  access_token  String
-  refresh_token String
+  access_token  String @unique
+  refresh_token String @unique
 }
 
 model user {
