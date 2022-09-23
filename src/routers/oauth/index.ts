@@ -6,6 +6,7 @@ import Crypto from "crypto-js";
 import config from "../../utils/config";
 import { prisma } from "../../index";
 import { CLIENT_PAGES } from "../../utils/constants";
+import { encrypt } from "../../utils/crypto";
 
 interface AuthResponseData {
   access_token: string;
@@ -56,14 +57,8 @@ export class DiscordOAuthRouter extends Router("/oauth") {
           })
         );
         let encrypted = {
-          access_token: Crypto.AES.encrypt(
-            access_token,
-            config.secret
-          ).toString(),
-          refresh_token: Crypto.AES.encrypt(
-            refresh_token,
-            config.secret
-          ).toString(),
+          access_token: encrypt(access_token),
+          refresh_token: encrypt(refresh_token),
         };
         const user = await gerUser(access_token);
         const OAuth2User = await prisma.auth.findUnique({
