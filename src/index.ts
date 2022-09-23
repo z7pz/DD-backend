@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyReply, InjectOptions } from "fastify";
+import { FastifyInstance } from "fastify";
 import { PrismaClient } from "@prisma/client";
 import { DiscordOAuthRouter } from "./routers/oauth";
 import { DashboardRouter } from "./routers/dashboard";
@@ -9,17 +9,22 @@ import cors from "@fastify/cors";
 import config from "./utils/config";
 import { Store } from "./utils/Store";
 import { MainRouter } from "./routers/Main";
-import ExpressPlugin from "@fastify/express";
-import { FastifyRequest } from "fastify";
 import { NotAuthorizedError } from "./utils/errors/Authorization";
-import { doesNotMatch } from "assert";
+import Discord from "discord.js";
 const prisma = new PrismaClient();
+const client = new Discord.Client({
+  intents: ["GuildMembers", "Guilds"],
+});
 MemoryStore;
 const bootstrap = async (
   fastify: FastifyInstance,
   _options: unknown,
   _next: () => void
 ) => {
+  client.login(config.discord.token);
+  client.on("ready", async () => {
+    console.log(client.user?.tag);
+  });
   fastify.register(cors, {
     origin: "*",
     credentials: true,
@@ -32,7 +37,6 @@ const bootstrap = async (
     store: new Store(prisma),
     cookie: { secure: false },
   });
-  await fastify.register(ExpressPlugin);
   registerRouter(new MainRouter(), fastify);
   registerRouter(new DiscordOAuthRouter(), fastify);
   await fastify.register((fastify, options, next) => {
@@ -47,9 +51,9 @@ const bootstrap = async (
       }
     });
     registerRouter(new DashboardRouter(), fastify);
-    next()
+    next();
   });
 };
 let options = { logger: true };
-export { prisma, options };
+export { prisma, client, options };
 export default bootstrap;
