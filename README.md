@@ -2,7 +2,7 @@
 ## this is not for production - only for learning purposes
 - Learn fastify and get used to it
 - Learn prisma
-- Learn how to implement discord oauth from scrath 
+- Learn how to implement discord oauth from scratch 
 - Use best practice techniques ex. commitslint
 - Foucs on code performance and little of code simplicity 
 
